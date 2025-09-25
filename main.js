@@ -277,6 +277,14 @@ if (document.readyState === 'loading') {
     initAboutMeScramble();
 }
 
+// Body
+
+const bodyObserver = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting) document.querySelector('body').classList.remove('hidden')
+})
+
+bodyObserver.observe(document.querySelector('body'));
+
 // Featured Projects Intersection Observer
 
 const featuredProjectsSectionObserver = new IntersectionObserver(entries => {
