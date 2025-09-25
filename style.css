@@ -41,8 +41,12 @@ body.hidden {
     }
 }
 
-body::selection,
-body::-moz-selection {
+::selection {
+    background-color: var(--primary-color);
+    color: var(--card-bg);
+}
+
+::-moz-selection {
     background-color: var(--primary-color);
     color: var(--card-bg);
 }
