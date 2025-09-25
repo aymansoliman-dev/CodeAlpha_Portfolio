@@ -744,7 +744,7 @@ nav img.author-avatar {
     border-radius: 50%;
     height: fit-content;
     outline: 0.125rem dashed transparent;
-    outline-offset: 0.25rem;
+    outline-offset: 0.125rem;
 
     &:hover {
         outline-color: var(--text-color);
