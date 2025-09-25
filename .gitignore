@@ -1,0 +1,23 @@
+# IDE and Editor files
+.vscode/
+.idea/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Node modules
+node_modules/
+
+# Logs
+*.log
+
+# Environment variables
+.env
+
+# Build outputs
+dist/
+build/
+
+# draft
+draft.txt
