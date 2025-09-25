@@ -639,7 +639,7 @@ nav img.author-avatar {
    Contact
 ------------------------------ */
 #contact {
-    background: linear-gradient(135deg, #a6d5df 40%, black);
+    background: linear-gradient(135deg, var(--primary-color) 40%, black);
 }
 
 #contact h2 {
@@ -655,6 +655,7 @@ nav img.author-avatar {
     transition: all 0.8s ease-in-out;
 
     & .figure {
+        background: var(--primary-color);
         margin: clamp(1rem, 4vw, 2rem) 0 clamp(1rem, 4vw, 2rem) clamp(1rem, 4vw, 2rem);
         flex-grow: 1;
         max-width: 45%;
