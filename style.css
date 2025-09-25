@@ -660,6 +660,7 @@ nav img.author-avatar {
         flex-grow: 1;
         max-width: 45%;
         overflow: hidden;
+        transition: 0s;
 
         & img {
             width: 100%;
