@@ -898,6 +898,7 @@ nav li:is( *:hover) .tooltip {
 
 .tooltip {
     display: none;
+    width: fit-content;
     background: var(--alt-color);
     color: var(--card-bg);
     padding: 0.5rem;
