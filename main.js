@@ -110,10 +110,10 @@ function getGap() {
     return parseFloat(getComputedStyle(testimonialsSlider).columnGap || 0);
 }
 
-function updateSliderPosition(behavior = 'smooth') {
+function updateSliderPosition() {
     testimonialsSlider.scrollTo({
         left: (cardWidth + gap) * currentIndex,
-        behavior: behavior
+        behavior: 'smooth'
     });
 }
 
@@ -135,7 +135,7 @@ function animateProgressBar(previousIndex, newIndex) {
     
     setTimeout(() => {
         progressBar?.classList.remove('bar-stretch-forward', 'bar-stretch-backward');
-    }, 1000);
+    }, 1000); // Match animation duration
 }
 
 // Next button
@@ -154,15 +154,8 @@ prevButton?.addEventListener('click', () => {
         const previousIndex = currentIndex;
         currentIndex = Math.max(0, currentIndex - 1);
         animateProgressBar(previousIndex, currentIndex);
-        updateSliderPosition('smooth');
+        updateSliderPosition();
     }
-});
-
-// Recalculate on resize
-window.addEventListener('resize', () => {
-    cardWidth = getCardWidth();
-    gap = getGap();
-    updateSliderPosition('instant'); // snap instantly on resize
 });
 
 // --------------------
