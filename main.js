@@ -117,11 +117,33 @@ function updateSliderPosition(behavior = 'smooth') {
     });
 }
 
+const progressBar = document.querySelector('#testimonials-controls .bar > .current');
+
+function animateProgressBar(previousIndex, newIndex) {
+    document.documentElement.style.setProperty('--previous-testimonial', previousIndex);
+    document.documentElement.style.setProperty('--current-testimonial', newIndex);
+    
+    progressBar?.classList.remove('bar-stretch-forward', 'bar-stretch-backward');
+    
+    progressBar?.offsetHeight;
+    
+    if (newIndex > previousIndex) {
+        progressBar?.classList.add('bar-stretch-forward');
+    } else {
+        progressBar?.classList.add('bar-stretch-backward');
+    }
+    
+    setTimeout(() => {
+        progressBar?.classList.remove('bar-stretch-forward', 'bar-stretch-backward');
+    }, 1000);
+}
+
 // Next button
 nextButton?.addEventListener('click', () => {
     if (currentIndex < testimonialsSlider.children.length - 1) {
+        const previousIndex = currentIndex;
         currentIndex++;
-        document.documentElement.style.setProperty('--current-testimonial', currentIndex);
+        animateProgressBar(previousIndex, currentIndex);
         updateSliderPosition('smooth');
     }
 });
@@ -129,8 +151,9 @@ nextButton?.addEventListener('click', () => {
 // Prev button
 prevButton?.addEventListener('click', () => {
     if (currentIndex > 0) {
+        const previousIndex = currentIndex;
         currentIndex = Math.max(0, currentIndex - 1);
-        document.documentElement.style.setProperty('--current-testimonial', currentIndex);
+        animateProgressBar(previousIndex, currentIndex);
         updateSliderPosition('smooth');
     }
 });

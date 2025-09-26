@@ -56,6 +56,7 @@ body.hidden {
 ------------------------------ */
 :root {
     --current-testimonial: 0;
+    --previous-testimonial: 0;
     /* Primary (changes with swatches) */
     --primary-color: var(--primary-blue);
 
@@ -496,7 +497,7 @@ nav img.author-avatar {
     display: flex;
     align-items: stretch;
     gap: 4rem;
-    overflow-x: auto;
+    overflow-x: hidden;
     overflow-y: clip;
     border-radius: 1rem;
     user-select: none;
@@ -601,6 +602,7 @@ nav img.author-avatar {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 2rem;
     margin-top: 2rem;
 }
 
@@ -615,12 +617,15 @@ nav img.author-avatar {
 }
 
 #testimonials-controls .bar {
+    flex-grow: 1;
+    max-width: 50%;
     display: flex;
     align-items: center;
     gap: 1rem;
 }
 
-#testimonials-controls .bar > div:nth-child(2) {
+#testimonials-controls .bar > .current {
+    flex-grow: 1;
     position: relative;
     width: clamp(6rem, 24vw, 12rem);;
     height: 0.25rem;
@@ -628,15 +633,54 @@ nav img.author-avatar {
     border-radius: 0.25rem;
 }
 
-#testimonials-controls .bar > div:nth-child(2)::after {
+#testimonials-controls .bar > .current::after {
     content: "";
     position: absolute;
-    left: calc(var(--current-testimonial) * 20%);
-    width: 20%;
+    left: calc(var(--current-testimonial) * (100% / 6));
+    width: calc(100% / 6);
     height: 100%;
     background: var(--primary-color);
     border-radius: 0.25rem;
-    transition: all 0.4s ease-in-out;
+    transition: none;
+}
+
+/* Testimonials Control Bar Stretching Animation */
+.bar-stretch-forward::after {
+    animation: stretch-forward 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.bar-stretch-backward::after {
+    animation: stretch-backward 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes stretch-forward {
+    0% {
+        left: calc(var(--previous-testimonial) * (100% / 6));
+        width: calc(100% / 6);
+    }
+    50% {
+        left: calc(var(--previous-testimonial) * (100% / 6));
+        width: calc(((var(--current-testimonial) - var(--previous-testimonial)) + 1) * (100% / 6));
+    }
+    100% {
+        left: calc(var(--current-testimonial) * (100% / 6));
+        width: calc(100% / 6);
+    }
+}
+
+@keyframes stretch-backward {
+    0% {
+        left: calc(var(--previous-testimonial) * (100% / 6));
+        width: calc(100% / 6);
+    }
+    50% {
+        left: calc(var(--current-testimonial) * (100% / 6));
+        width: calc(((var(--previous-testimonial) - var(--current-testimonial)) + 1) * (100% / 6));
+    }
+    100% {
+        left: calc(var(--current-testimonial) * (100% / 6));
+        width: calc(100% / 6);
+    }
 }
 
 /* ------------------------------
@@ -798,7 +842,7 @@ nav .author-avatar:hover {
 }
 
 .swatches {
-    position: absolute;
+    position: fixed;
     inset: 0;
     z-index: 100;
     display: flex;
